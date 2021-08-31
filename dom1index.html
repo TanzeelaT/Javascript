@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="dom1style.css">
+</head>
+<body>
+    <div class="main">
+        <div>
+            <h1>Registration Form</h1>
+        </div>
+        <div class='firstlastNames'>
+            <div>
+                <input type='text' placeholder='First Name' class='fName' />
+            </div>
+            <div>
+                <input type='text' placeholder='Last Name' class='lName' />
+            </div>
+        </div>
+        <div>
+            <h3 class='p1'></h3>
+        </div>
+        <div>
+            <h2 id="hola">How many vehicles do you want to buy?</h2>
+        </div>
+        <div class='btnsTotalVehicles'>
+            <div>
+                <button id="add" onclick="addCar ()">+</button>
+            </div>
+            <div>
+                <button onclick="removeCar ()">-</button>
+            </div>
+        </div>
+        <div id="end"></div>
+    </div>
+    <!-- 
+    document.getElementsByClassName('test')[0]
+    document.getElementById("demo").innerHTML
+    document.createElement("LI")
+    newItem.appendChild(textnode);
+    document.getElementById("myH1").style.color 
+-->
+    <script src="dom1script.js"></script>
+</body>
+</html>
