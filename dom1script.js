@@ -1,156 +1,93 @@
-let fName = document.getElementsByClassName('fName')[0];
-let lName = document.getElementsByClassName('lName')[0];
-let p1 = document.getElementsByClassName('p1')[0];
-
+let fName = document.getElementById('fName');
+let lName = document.getElementById('lName');
 lName.onchange = nameChange;
 fName.onchange = nameChange;
-
-function nameChange(e) {
+function nameChange() {
     if (fName.value && lName.value) {
-    p1.innerHTML = `Salams ${document.getElementsByClassName('fName')[0].value} ${document.getElementsByClassName('lName')[0].value}! Thank you for joining us.`;
-} else {
-    p1.innerHTML = '';
+    document.getElementById('salamText').innerHTML = `Salams ${document.getElementById('fName').value} ${document.getElementById('lName').value}! Thank you for joining us.`;
+    } 
 }
-}
-
 function removeCar () {
-    document.getElementById("hola").style.color = "blue";
-    let uncar = document.getElementById(`${addCount}`);
-    uncar.remove();
-    addCount--;
+    document.getElementById(`${carCount}`).remove();
+    carCount--;
 }
-
-
-let addCount = 0;
-
-
+//Counter to get the right # of vehicle for each card. 'end' div to append car cards to when they are added. this div is at the end of html code
+let carCount = 0; 
 let end = document.getElementById('end');
 function addCar () {
-    addCount++;
-    let currentCount = addCount;
-    let carNumber = document.createElement("div");
-    let carAdd = document.createAttribute("id");
-    carAdd.value=`${addCount}`;
-    carNumber.setAttributeNode(carAdd);
-    document.getElementById("hola").style.color = "red";
-    let vehicle = document.createAttribute("class")
-    vehicle.value="vehicle"
-    let car = document.createElement("h2")
-    let newtest = document.createTextNode(`What color of vehicle would you prefer for vehicle ${addCount}`);
-    car.appendChild(newtest);
-    car.setAttributeNode(vehicle);
-    carNumber.appendChild(car);
-    
-    let dive2 = document.createElement("div");
-    car.appendChild(dive2);
-    let colorButtons = document.createAttribute("class")
-    colorButtons.value="colorButtons";
-    dive2.setAttributeNode(colorButtons);
+    carCount++;
+    let currentCount = carCount; //makes sure the colour and size changes only apply to the current car box
+    let car = document.createElement("div");
+    car.setAttribute('id',`${carCount}`);
+    car.setAttribute('class','vehicle');
+    end.appendChild(car); //creates car div that appends to existing end div in html
+    let h2Text = document.createElement("h2")
+    h2Text.innerHTML = `What color of vehicle would you prefer for vehicle ${carCount}?`;
+    car.appendChild(h2Text); //adds header and appends to original div
+    let div2 = document.createElement("div");
+    car.appendChild(div2);
+    div2.setAttribute('class','colorButtons'); //creates another div for color buttons
     let green = document.createElement("BUTTON");
     green.innerHTML="green";
-    green.onclick = green1;
-
-    function green1() {
+    green.onclick = changeGreen;
+    function changeGreen() {
         document.getElementById(`car${currentCount}`).style.backgroundColor = "green";
-    }
-
+    } //creates button and function for green
     let grey = document.createElement("BUTTON");
     grey.innerHTML="grey";
-    grey.onclick = grey1;
-
-    function grey1 () {
+    grey.onclick = changeGrey;
+    function changeGrey () {
         document.getElementById(`car${currentCount}`).style.backgroundColor = "grey";
-    }
-
+    } //creates button and function for grey
     let yellow = document.createElement("BUTTON");
     yellow.innerHTML="yellow";
-    yellow.onclick = yellow1;
-
-    function yellow1(){
+    yellow.onclick = changeYellow;
+    function changeYellow(){
         document.getElementById(`car${currentCount}`).style.backgroundColor = "yellow";
-    }
-
+    } //creates button and function for yellow
     let brown = document.createElement("BUTTON");
     brown.innerHTML="brown";
-    brown.onclick = brown1;
-
-    function brown1 () {
+    brown.onclick = changeBrown;
+    function changeBrown(){
         document.getElementById(`car${currentCount}`).style.backgroundColor = "brown";
-    }
-
-    dive2.appendChild(green);
-    dive2.appendChild(grey);
-    dive2.appendChild(yellow);
-    dive2.appendChild(brown);
-    
+    } //creates button and function for brown
+    div2.appendChild(green);
+    div2.appendChild(grey);
+    div2.appendChild(yellow);
+    div2.appendChild(brown); //appends all colours to the colour div
     let size = document.createElement("h2")
-    let sizetext = document.createTextNode("What is the size of the car?");
-    size.appendChild(sizetext);
-    car.appendChild(size);
-
-    let dive3 = document.createElement("div");
-    car.appendChild(dive3);
-    let sizeVehicle = document.createAttribute("class")
-    sizeVehicle.value="sizeVehicle";
-    dive3.setAttributeNode(sizeVehicle);
-    let dive3l = document.createElement("p");
-    let ltext = document.createTextNode("Length");
+    size.innerHTML = "What is the size of the car?";
+    car.appendChild(size); //creates header
+    let div3 = document.createElement("div");
+    div3.setAttribute("class", "sizeVehicle");
+    car.appendChild(div3); //creates div for size of cars
+    let lText = document.createElement("p");
+    lText.innerHTML = "Length";
     let length = document.createElement("INPUT");
     length.setAttribute("type", "text");
-    let l1 = document.createAttribute("class")
-    l1.value=`l1${currentCount}`;
-    length.setAttributeNode(l1);
+    length.setAttribute("placeholder", "Length");
+    length.setAttribute('id',`length${currentCount}`);;
     length.onchange = lChange;
-
-    function lChange(e) {
-        document.getElementById(`car${currentCount}`).style.height = `${document.getElementsByClassName(`l1${currentCount}`)[0].value}px`;
+    function lChange() {
+        document.getElementById(`car${currentCount}`).style.height = `${document.getElementById(`length${currentCount}`).value}px`;
     }    
-
-    dive3l.appendChild(ltext);
-    dive3l.appendChild(length);
-    dive3.appendChild(dive3l);
-    let dive3w = document.createElement("p");
-    let wtext = document.createTextNode("Width");
+    lText.appendChild(length);
+    div3.appendChild(lText); //creates length input and function
+    let wText = document.createElement("p");
+    wText.innerHTML ="Width";
     let width = document.createElement("INPUT");
-    width.setAttribute("type", "text", "w1");
-    let w1 = document.createAttribute("class")
-    w1.value=`w1${currentCount}`;
-    width.setAttributeNode(w1);
+    width.setAttribute("type", "text");
+    width.setAttribute("placeholder", "width");
+    width.setAttribute('id',`width${currentCount}`);
     width.onchange = wChange;
-
-    function wChange(e) {
-        document.getElementById(`car${currentCount}`).style.width = `${document.getElementsByClassName(`w1${currentCount}`)[0].value}px`;
+    function wChange() {
+        document.getElementById(`car${currentCount}`).style.width = `${document.getElementById(`width${currentCount}`).value}px`;
     }
-
-    dive3w.appendChild(wtext);
-    dive3w.appendChild(width);
-    dive3.appendChild(dive3w);
-
-    let dive4 = document.createElement("div");
-    let dive4text = document.createTextNode("Car size & color");
-    dive4.appendChild(dive4text);
-    car.appendChild(dive4);
-    let vehicleSize = document.createAttribute("class")
-    vehicleSize.value="vehicleSize";
-    dive4.setAttributeNode(vehicleSize);
-    dive4.setAttribute("id", `car${currentCount}`);
-    
-
-/*  */
-
-    
-    end.appendChild(carNumber);
+    wText.appendChild(width);
+    div3.appendChild(wText); //creates width input and function
+    let div4 = document.createElement("div");
+    div4.innerHTML = "Car size & color";
+    div4.setAttribute('class','vehicleSize');
+    div4.setAttribute("id", `car${currentCount}`);
+    car.appendChild(div4); //creates last div for the car box that will change colour and size
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
